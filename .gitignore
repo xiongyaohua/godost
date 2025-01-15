@@ -38,3 +38,4 @@
 
 /godot-cpp
 .*
+compile_commands.json

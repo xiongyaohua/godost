@@ -1,2 +1,2 @@
 build:
-	scons
+	scons compiledb=true
