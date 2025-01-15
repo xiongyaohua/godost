@@ -20,10 +20,10 @@
           buildInputs =  [
             cargo
             rustup
-            nushell
+            fish
           ];
           shellHook = ''
-            exec nu
+            exec fish
           '';
       };    
     }
