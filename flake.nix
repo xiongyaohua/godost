@@ -21,6 +21,7 @@
             cargo
             rustup
             fish
+            just
           ];
           shellHook = ''
             exec fish
