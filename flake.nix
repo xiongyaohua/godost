@@ -22,6 +22,7 @@
             rustup
             fish
             just
+            scons
           ];
           shellHook = ''
             exec fish
