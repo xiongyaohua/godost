@@ -14,8 +14,14 @@ env = SConscript("godot-cpp/SConstruct")
 env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 
+# Rust part
+rustlib = env.Command("target/debug/libstub.a", "", "cargo build")
+AlwaysBuild(rustlib)
+
+# C++ part
 if env["target"] in ["editor", "template_debug"]:
-    doc_data = env.GodotCPPDocData("src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
+    doc_data = env.GodotCPPDocData(
+        "src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
     sources.append(doc_data)
 
 if env["platform"] == "macos":
@@ -28,18 +34,21 @@ if env["platform"] == "macos":
 elif env["platform"] == "ios":
     if env["ios_simulator"]:
         library = env.StaticLibrary(
-            "project/bin/libgdexample.{}.{}.simulator.a".format(env["platform"], env["target"]),
+            "project/bin/libgdexample.{}.{}.simulator.a".format(
+                env["platform"], env["target"]),
             source=sources,
         )
     else:
         library = env.StaticLibrary(
-            "project/bin/libgdexample.{}.{}.a".format(env["platform"], env["target"]),
+            "project/bin/libgdexample.{}.{}.a".format(
+                env["platform"], env["target"]),
             source=sources,
         )
 else:
     library = env.SharedLibrary(
-        "project/bin/libgdexample{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
-        source=sources,
+        "project/bin/libgdexample{}{}".format(
+            env["suffix"], env["SHLIBSUFFIX"]),
+        source=sources, LIBS=rustlib
     )
 
 env.NoCache(library)
