@@ -16,6 +16,11 @@
 
 using namespace godot;
 
+// ffi export
+extern "C" int64_t cpp_div(int64_t left, int64_t right) {
+    return left / right;
+}
+
 class MyCallableCustom : public CallableCustom {
 public:
 	virtual uint32_t hash() const {
@@ -182,6 +187,7 @@ void Example::_validate_property(PropertyInfo &p_property) const {
 void Example::_bind_methods() {
 	// Methods.
 	ClassDB::bind_method(D_METHOD("ffi_add", "left", "right"), &Example::ffi_add);
+	ClassDB::bind_method(D_METHOD("ffi_half_mul", "left", "right"), &Example::ffi_half_mul);
 	ClassDB::bind_method(D_METHOD("simple_func"), &Example::simple_func);
 	ClassDB::bind_method(D_METHOD("simple_const_func"), &Example::simple_const_func);
 	ClassDB::bind_method(D_METHOD("custom_ref_func", "ref"), &Example::custom_ref_func);

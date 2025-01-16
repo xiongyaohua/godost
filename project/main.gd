@@ -11,6 +11,7 @@ func _ready():
 
 	# FFI
 	assert_equal(example.ffi_add(3, 5), 8)
+	assert_equal(example.ffi_half_mul(3, 6), 9)
 
 	# Timing of set instance binding.
 	assert_equal(example.is_object_binding_set_by_parent_constructor(), true)

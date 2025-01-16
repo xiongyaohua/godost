@@ -31,13 +31,10 @@
 using namespace godot;
 
 // ffi import
-typedef int64_t (*CppOp)(int64_t, int64_t);
+//typedef int64_t (*CppOp)(int64_t, int64_t);
+//extern "C" void register_cpp_op(CppOp p);
 extern "C" int64_t rust_add(int64_t left, int64_t right);
-extern "C" void register_cpp_op(CppOp p);
-// ffi export
-//extern "C" int64_t export_cpp_mul(int64_t left, int64_t right) {
-//    return left * right;
-//}
+extern "C" int64_t rust_half_mul(int64_t left, int64_t right);
 
 class ExampleRef : public RefCounted {
 	GDCLASS(ExampleRef, RefCounted);
@@ -118,6 +115,9 @@ public:
 	// ffi
 	int64_t ffi_add(int64_t left, int64_t right) {
 	   return rust_add(left, right);
+	}
+	int64_t ffi_half_mul(int64_t left, int64_t right) {
+	   return rust_half_mul(left, right);
 	}
 	// Functions.
 	void simple_func();

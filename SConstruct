@@ -15,8 +15,8 @@ env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 
 # Rust part
-rustlib = env.Command("target/debug/libstub.a", "", "cargo build")
-AlwaysBuild(rustlib)
+rustlib = env.Command("target/debug/libstub.a", [Glob("/cargos/**/*.rs"), Glob("cargos/**/*.toml")], "cargo build")
+#AlwaysBuild(rustlib)
 
 # 追加而不是替代
 env.Append(LIBS=rustlib)
