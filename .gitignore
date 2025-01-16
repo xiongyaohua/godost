@@ -39,3 +39,6 @@
 /godot-cpp
 .*
 compile_commands.json
+
+src/*.os
+src/gen
