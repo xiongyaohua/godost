@@ -19,7 +19,8 @@
       devShells.default = mkShell {
           buildInputs =  [
             cargo
-            rustup
+            #rustup
+            rustc
             fish
             just
             scons
