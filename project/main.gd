@@ -9,6 +9,9 @@ class TestClass:
 func _ready():
 	var example: Example = $Example
 
+	# FFI
+	assert_equal(example.ffi_add(3, 5), 8)
+
 	# Timing of set instance binding.
 	assert_equal(example.is_object_binding_set_by_parent_constructor(), true)
 

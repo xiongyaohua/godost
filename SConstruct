@@ -18,6 +18,9 @@ sources = Glob("src/*.cpp")
 rustlib = env.Command("target/debug/libstub.a", "", "cargo build")
 AlwaysBuild(rustlib)
 
+# 追加而不是替代
+env.Append(LIBS=rustlib)
+
 # C++ part
 if env["target"] in ["editor", "template_debug"]:
     doc_data = env.GodotCPPDocData(
@@ -48,7 +51,7 @@ else:
     library = env.SharedLibrary(
         "project/bin/libgdexample{}{}".format(
             env["suffix"], env["SHLIBSUFFIX"]),
-        source=sources, LIBS=rustlib
+        source=sources
     )
 
 env.NoCache(library)

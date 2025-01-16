@@ -10,6 +10,7 @@
 // lead to annoying situations due to the ton of macros it defines.
 // So we include it and make sure CI warns us if we use something that conflicts
 // with a Windows define.
+#include <cstdint>
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -28,6 +29,15 @@
 #include <godot_cpp/core/gdvirtual.gen.inc>
 
 using namespace godot;
+
+// ffi import
+typedef int64_t (*CppOp)(int64_t, int64_t);
+extern "C" int64_t rust_add(int64_t left, int64_t right);
+extern "C" void register_cpp_op(CppOp p);
+// ffi export
+//extern "C" int64_t export_cpp_mul(int64_t left, int64_t right) {
+//    return left * right;
+//}
 
 class ExampleRef : public RefCounted {
 	GDCLASS(ExampleRef, RefCounted);
@@ -105,6 +115,10 @@ public:
 	Example();
 	~Example();
 
+	// ffi
+	int64_t ffi_add(int64_t left, int64_t right) {
+	   return rust_add(left, right);
+	}
 	// Functions.
 	void simple_func();
 	void simple_const_func() const;

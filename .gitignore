@@ -42,3 +42,4 @@ compile_commands.json
 
 src/*.os
 src/gen
+project/bin

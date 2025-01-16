@@ -181,6 +181,7 @@ void Example::_validate_property(PropertyInfo &p_property) const {
 
 void Example::_bind_methods() {
 	// Methods.
+	ClassDB::bind_method(D_METHOD("ffi_add", "left", "right"), &Example::ffi_add);
 	ClassDB::bind_method(D_METHOD("simple_func"), &Example::simple_func);
 	ClassDB::bind_method(D_METHOD("simple_const_func"), &Example::simple_const_func);
 	ClassDB::bind_method(D_METHOD("custom_ref_func", "ref"), &Example::custom_ref_func);
