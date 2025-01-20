@@ -100,7 +100,7 @@ mod godot_to_typst {
     ///
     /// Return a handle to a finished task. Null pointer indicate failure.
     #[no_mangle]
-    pub extern "C" fn ffi_rust_task_create(main: Buffer) -> *const TypstTask {
+    pub extern "C" fn ffi_typst_task_create(main: Buffer) -> *const TypstTask {
         let _ = main;
         0 as *const TypstTask
     }
@@ -110,7 +110,7 @@ mod godot_to_typst {
     /// Return 0 for failed compilation. Succeed compilation produce at least
     /// one (empty) page.
     #[no_mangle]
-    pub extern "C" fn ffi_rust_task_get_page_count(task: *const TypstTask) -> usize {
+    pub extern "C" fn ffi_typst_task_get_page_count(task: *const TypstTask) -> usize {
         let _ = task;
         0
     }
@@ -120,7 +120,7 @@ mod godot_to_typst {
     /// Only valid to call when the compilation failed. Return null buffer
     /// otherwise.
     #[no_mangle]
-    pub extern "C" fn ffi_rust_task_borrow_error_message(task: *const TypstTask) -> Buffer {
+    pub extern "C" fn ffi_typst_task_borrow_error_message(task: *const TypstTask) -> Buffer {
         let _ = task;
         Buffer {
             pointer: 0 as *const u8,
@@ -133,7 +133,7 @@ mod godot_to_typst {
     /// Return null buffer if the compilation is failed, or the page index is out
     /// of scope.
     #[no_mangle]
-    pub extern "C" fn ffi_rust_task_borrow_page_buffer(task: *const TypstTask, page: usize) -> Buffer {
+    pub extern "C" fn ffi_typst_task_borrow_page_buffer(task: *const TypstTask, page: usize) -> Buffer {
         let _ = task;
         let _ = page;
         Buffer {
@@ -147,7 +147,7 @@ mod godot_to_typst {
     /// Return 0x0 size, if the compilation is failed, or the page index is out
     /// of scope.
     #[no_mangle]
-    pub extern "C" fn ffi_rust_task_get_page_info(task: *const TypstTask, page: usize) -> PageInfo {
+    pub extern "C" fn ffi_typst_task_get_page_info(task: *const TypstTask, page: usize) -> PageInfo {
         let _ = task;
         let _ = page;
         PageInfo {
@@ -160,7 +160,7 @@ mod godot_to_typst {
     ///
     /// Return `false` if something goes wrong, an invalid pointer most likely.
     #[no_mangle]
-    pub extern "C" fn ffi_rust_task_destroy(task: *const TypstTask) -> bool {
+    pub extern "C" fn ffi_typst_task_destroy(task: *const TypstTask) -> bool {
         let _ = task;
         false
     }
