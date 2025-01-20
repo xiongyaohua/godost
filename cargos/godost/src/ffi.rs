@@ -27,6 +27,7 @@
 //! type represent texts using char32, while rust use utf8, the user should take
 //! care the encode and decode between two representations.
 
+#![allow(dead_code)]
 // Opaque pointers, see explaination from the following link:
 // https://stackoverflow.com/questions/38315383/whats-the-rust-idiom-to-define-a-field-pointing-to-a-c-opaque-pointer
 
@@ -100,6 +101,7 @@ mod godot_to_typst {
     /// Return a handle to a finished task. Null pointer indicate failure.
     #[no_mangle]
     pub extern "C" fn ffi_rust_task_create(main: Buffer) -> *const TypstTask {
+        let _ = main;
         0 as *const TypstTask
     }
 
@@ -109,6 +111,7 @@ mod godot_to_typst {
     /// one (empty) page.
     #[no_mangle]
     pub extern "C" fn ffi_rust_task_get_page_count(task: *const TypstTask) -> usize {
+        let _ = task;
         0
     }
 
