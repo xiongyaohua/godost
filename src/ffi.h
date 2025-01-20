@@ -1,5 +1,8 @@
 /// FFI functions for C++ side. Keep in-sync with its Rust conterpart.
 
+#ifndef FFI_H
+#define FFI_H
+
 #include <cstddef>
 #include <cstdint>
 
@@ -32,3 +35,5 @@ extern "C" Buffer ffi_typst_task_borrow_error_message(TypstTask* task);
 extern "C" Buffer ffi_typst_task_borrow_page_buffer(TypstTask* task);
 extern "C" PageInfo ffi_typst_task_get_page_info(TypstTask* task);
 extern "C" bool ffi_rust_task_destroy(TypstTask* task);
+
+#endif // FFI_H
