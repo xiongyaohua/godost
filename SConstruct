@@ -21,6 +21,7 @@ rustlib = env.Command("target/debug/libstub.a", [Glob("/cargos/**/*.rs"), Glob("
 # 追加而不是替代
 env.Append(LIBS=rustlib)
 
+lib_name = "godost"
 # C++ part
 if env["target"] in ["editor", "template_debug"]:
     doc_data = env.GodotCPPDocData(
@@ -29,28 +30,28 @@ if env["target"] in ["editor", "template_debug"]:
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "project/bin/libgdexample.{}.{}.framework/libgdexample.{}.{}".format(
-            env["platform"], env["target"], env["platform"], env["target"]
+        "project/bin/lib{}.{}.{}.framework/libgdexample.{}.{}".format(
+            lib_name, env["platform"], env["target"], env["platform"], env["target"]
         ),
         source=sources,
     )
 elif env["platform"] == "ios":
     if env["ios_simulator"]:
         library = env.StaticLibrary(
-            "project/bin/libgdexample.{}.{}.simulator.a".format(
-                env["platform"], env["target"]),
+            "project/bin/lib{}.{}.{}.simulator.a".format(
+                lib_name, env["platform"], env["target"]),
             source=sources,
         )
     else:
         library = env.StaticLibrary(
-            "project/bin/libgdexample.{}.{}.a".format(
-                env["platform"], env["target"]),
+            "project/bin/lib{}.{}.{}.a".format(
+                lib_name, env["platform"], env["target"]),
             source=sources,
         )
 else:
     library = env.SharedLibrary(
-        "project/bin/libgdexample{}{}".format(
-            env["suffix"], env["SHLIBSUFFIX"]),
+        "project/bin/lib{}{}{}".format(
+            lib_name, env["suffix"], env["SHLIBSUFFIX"]),
         source=sources
     )
 
