@@ -28,8 +28,8 @@ private:
     Ref<Texture2D> placeholder; // A placeholder image shown when there is no actual typst pages.
     TypstTask *running_task = nullptr; // Handle to a running compilation task.
     String main_file = ""; // The main ".typ" for for compilation session.
-    size_t preferred_page = 0;
-    size_t actual_page = 0;
+    uint32_t preferred_page = 0;
+    uint32_t actual_page = 0;
 
 protected:
 	static void _bind_methods();
@@ -46,9 +46,9 @@ public:
 	String get_main_file() { return main_file; }
 
 	// IMPORTANT: Here pages are 1-based. Page 0 is the placeholder.
-	Ref<Image> get_page(const size_t p_page) { return placeholder; }
-	size_t get_page_count() { return pages.size(); }
-	void show_page(size_t p_page) {}
+	Ref<Image> get_page(const uint32_t p_page) { return placeholder; }
+	uint32_t get_page_count() { return pages.size(); }
+	void show_page(uint32_t p_page) {}
 
 	bool is_ready() { return true; }
 	String invoke_compilation(bool p_async = false) { return "Do Nothing!"; }

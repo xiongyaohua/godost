@@ -110,7 +110,7 @@ mod godot_to_typst {
     /// Return 0 for failed compilation. Succeed compilation produce at least
     /// one (empty) page.
     #[no_mangle]
-    pub extern "C" fn ffi_typst_task_get_page_count(task: *const TypstTask) -> usize {
+    pub extern "C" fn ffi_typst_task_get_page_count(task: *const TypstTask) -> u32 {
         let _ = task;
         0
     }
@@ -133,7 +133,7 @@ mod godot_to_typst {
     /// Return null buffer if the compilation is failed, or the page index is out
     /// of scope.
     #[no_mangle]
-    pub extern "C" fn ffi_typst_task_borrow_page_buffer(task: *const TypstTask, page: usize) -> Buffer {
+    pub extern "C" fn ffi_typst_task_borrow_page_buffer(task: *const TypstTask, page: u32) -> Buffer {
         let _ = task;
         let _ = page;
         Buffer {
@@ -147,7 +147,7 @@ mod godot_to_typst {
     /// Return 0x0 size, if the compilation is failed, or the page index is out
     /// of scope.
     #[no_mangle]
-    pub extern "C" fn ffi_typst_task_get_page_info(task: *const TypstTask, page: usize) -> PageInfo {
+    pub extern "C" fn ffi_typst_task_get_page_info(task: *const TypstTask, page: u32) -> PageInfo {
         let _ = task;
         let _ = page;
         PageInfo {
