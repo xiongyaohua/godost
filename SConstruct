@@ -38,8 +38,8 @@ if env["target"] in ["editor", "template_debug"]:
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "project/bin/lib{}.{}.{}.framework/libgdexample.{}.{}".format(
-            lib_name, env["platform"], env["target"], env["platform"], env["target"]
+        "project/bin/lib{}.{}.{}.framework/lib{}.{}.{}".format(
+            lib_name, env["platform"], env["target"], lib_name, env["platform"], env["target"]
         ),
         source=sources,
     )
