@@ -32,5 +32,5 @@ void TypstView::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "placeholder", PROPERTY_HINT_RESOURCE_TYPE, "Texture2D"), "set_placeholder", "get_placeholder");
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "main_file", PROPERTY_HINT_FILE, "*.typ"), "set_main_file", "get_main_file");
-	ADD_SIGNAL(MethodInfo("ready", PropertyInfo(Variant::BOOL, "is_succeed")));
+	ADD_SIGNAL(MethodInfo("typst_finished", PropertyInfo(Variant::BOOL, "succeed")));
 }

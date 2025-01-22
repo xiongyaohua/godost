@@ -26,4 +26,8 @@ text = "Click me!"
 
 [node name="ExampleChild" type="ExampleChild" parent="."]
 
+[node name="TypstView" type="TypstView" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="custom_signal" from="Example" to="." method="_on_Example_custom_signal"]

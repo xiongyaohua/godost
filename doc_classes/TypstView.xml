@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TypstView" inherits="TextureRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="await_compilation">
+			<return type="void" />
+			<description>
+			</description>
+		</method>
+		<method name="get_page">
+			<return type="Image" />
+			<param index="0" name="_unnamed_arg0" type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="get_page_count">
+			<return type="int" />
+			<description>
+			</description>
+		</method>
+		<method name="invoke_compilation">
+			<return type="String" />
+			<param index="0" name="p_sync" type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="is_ready">
+			<return type="bool" />
+			<description>
+			</description>
+		</method>
+		<method name="show_page">
+			<return type="void" />
+			<param index="0" name="p_page" type="int" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="main_file" type="String" setter="set_main_file" getter="get_main_file" default="&quot;&quot;">
+		</member>
+		<member name="placeholder" type="Texture2D" setter="set_placeholder" getter="get_placeholder">
+		</member>
+	</members>
+	<signals>
+		<signal name="typst_finished">
+			<param index="0" name="succeed" type="bool" />
+			<description>
+			    Typst engine finished typesetting task. Return `true` if succeed, false otherwise.
+			</description>
+		</signal>
+	</signals>
+</class>
