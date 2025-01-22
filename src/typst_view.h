@@ -34,15 +34,16 @@ private:
 protected:
 	static void _bind_methods();
 	void _notification(int p_what);
+	void _update_view();
 
 public:
 	TypstView();
 	~TypstView();
 
-	void set_placeholder(const Ref<Texture2D> &p_image) { placeholder = p_image; }
+	void set_placeholder(const Ref<Texture2D> &p_image);
 	Ref<Texture2D> get_placeholder() { return placeholder; }
 
-	void set_main_file(const String &p_path) { main_file = p_path; } // TODO: validate its a ".typ" file.
+	void set_main_file(const String &p_path);
 	String get_main_file() { return main_file; }
 
 	// IMPORTANT: Here pages are 1-based. Page 0 is the placeholder.

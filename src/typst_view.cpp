@@ -7,6 +7,19 @@
 
 using namespace godot;
 
+void TypstView::_update_view() {
+    set_texture(placeholder);
+}
+
+void TypstView::set_main_file(const String& p_path) {
+    main_file = p_path;
+}
+
+void TypstView::set_placeholder(const Ref<Texture2D> &p_image) {
+    placeholder = p_image;
+    _update_view();
+}
+
 TypstView::TypstView() {
 }
 
