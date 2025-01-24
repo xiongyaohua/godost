@@ -51,7 +51,7 @@
 		<signal name="typst_finished">
 			<param index="0" name="succeed" type="bool" />
 			<description>
-			    Typst engine finished typesetting task. Return `true` if succeed, false otherwise.
+				Typst engine finished typesetting task. Return `true` if succeed, false otherwise.
 			</description>
 		</signal>
 	</signals>

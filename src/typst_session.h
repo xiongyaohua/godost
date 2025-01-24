@@ -1,5 +1,5 @@
-#ifndef TYPST_SESSION
-#define  TYPST_SESSION
+#ifndef TYPST_SESSION_H
+#define  TYPST_SESSION_H
 
 /* Wraper on Godot side */
 #include <cstdint>
@@ -28,4 +28,4 @@ public:
     Array get_all_pages();
 };
 
-#endif // TYPST_SESSION
+#endif // TYPST_SESSION_H

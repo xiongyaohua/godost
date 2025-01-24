@@ -10,36 +10,29 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
-
-#include "example.h"
-#include "tests.h"
+#include <godot_cpp/classes/editor_plugin_registration.hpp>
 
 #include "typst_view.h"
+#include "typst_view_editor_plugin.h"
 
 using namespace godot;
 
 void initialize_godost_module(ModuleInitializationLevel p_level) {
-	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
-		return;
+    if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
+        GDREGISTER_INTERNAL_CLASS(TypstViewEditor);
+        GDREGISTER_INTERNAL_CLASS(TypstViewEditorPlugin);
+        EditorPlugins::add_by_type<TypstViewEditorPlugin>();
+    }
+    else if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
+        GDREGISTER_CLASS(TypstView);
 	}
-
-	GDREGISTER_CLASS(ExampleRef);
-	GDREGISTER_CLASS(ExampleMin);
-	GDREGISTER_CLASS(Example);
-	GDREGISTER_VIRTUAL_CLASS(ExampleVirtual);
-	GDREGISTER_ABSTRACT_CLASS(ExampleAbstractBase);
-	GDREGISTER_CLASS(ExampleConcrete);
-	GDREGISTER_CLASS(ExampleBase);
-	GDREGISTER_CLASS(ExampleChild);
-	GDREGISTER_RUNTIME_CLASS(ExampleRuntime);
-	GDREGISTER_CLASS(ExamplePrzykład);
-
-	GDREGISTER_CLASS(TypstView);
 }
 
 void uninitialize_godost_module(ModuleInitializationLevel p_level) {
-	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
-		return;
+	if (p_level == godot::MODULE_INITIALIZATION_LEVEL_EDITOR) {
+	    EditorPlugins::remove_by_type<TypstViewEditorPlugin>();
+	}
+	else if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
 	}
 }
 
@@ -50,7 +43,7 @@ GDExtensionBool GDE_EXPORT godost_library_init(GDExtensionInterfaceGetProcAddres
 
 	init_obj.register_initializer(initialize_godost_module);
 	init_obj.register_terminator(uninitialize_godost_module);
-	init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SCENE);
+	init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SERVERS);
 
 	return init_obj.init();
 }
