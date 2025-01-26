@@ -1,29 +1,14 @@
-#include "ffi.h"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/core/memory.hpp"
 #include "godot_cpp/variant/packed_byte_array.hpp"
 #include <godot_cpp/classes/file_access.hpp>
 
+#include "ffi.h"
+
 using namespace godot;
 
 // Helper class and functions. Keep them internal to this unit.
 namespace {
-    PackedByteArray buffer_to_array(Buffer p_buffer) {
-        PackedByteArray array;
-        array.resize(p_buffer.size);
-        memcpy(array.ptrw(), p_buffer.pointer, p_buffer.size);
-
-        return array;
-    }
-
-    Buffer array_to_buffer(const PackedByteArray& p_array) {
-        Buffer buffer;
-        buffer.pointer = p_array.ptr();
-        buffer.size = p_array.size();
-
-        return buffer;
-    }
-
     class FileWithCache {
         String path;
         PackedByteArray bytes;
@@ -36,6 +21,7 @@ namespace {
             Error err = FileAccess::get_open_error();
 
             if(err == OK) {
+                // Be careful or the use of memnew between C++ class and GDExtension class.
                 FileWithCache * ptr = memnew(FileWithCache);
                 ptr->path = p_path;
                 ptr->bytes = bytes;
@@ -53,7 +39,7 @@ namespace {
 
         Buffer get_text() {
             if(!decoded) {
-                text = bytes.get_string_from_utf8().to_utf8_buffer();
+                text = bytes.get_string_from_utf8().to_utf8_buffer(); // Ensure it is a well formed utf8 string.
                 decoded = true;
             }
 
@@ -66,7 +52,7 @@ namespace {
 /* Implement FFI functions called from Typst side. */
 
 GodotFile* ffi_godot_file_open(Buffer path) {
-    String path_string = buffer_to_array(path).get_string_from_utf8();
+    String path_string = buffer_to_string(path);
     return (GodotFile*)FileWithCache::open(path_string);
 }
 

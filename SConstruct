@@ -23,7 +23,7 @@ if env["target"] in ["editor", "template_debug"]:
         print("Not including class reference as we're targeting a pre-4.3 baseline.")
 
 # Rust part
-rustlib = env.Command("target/debug/libstub.a", [Glob("/cargos/**/*.rs"), Glob("cargos/**/*.toml")], "cargo build")
+rustlib = env.Command("target/debug/libgodost.a", [Glob("/cargos/**/*.rs"), Glob("cargos/**/*.toml")], "cargo build")
 #AlwaysBuild(rustlib)
 
 # 追加而不是替代
