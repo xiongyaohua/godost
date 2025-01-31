@@ -19,6 +19,7 @@
       devShells.default = mkShell {
           buildInputs =  [
             cargo
+            git
             #rustup
             rustc
             fish
